@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="ar" dir="ltr">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NOIR COFFEE | Iced Drinks</title>
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -18,292 +18,212 @@
     }
 
     body {
-      background: #0b0b0b;
-      font-family: 'Poppins', sans-serif;
-      color: white;
-      padding-top: calc(env(safe-area-inset-top) + 25px);
-      padding-bottom: 40px;
+      background-color: #0b0b0b;
+      color: #ffffff;
+      font-family: 'Poppins', 'Cairo', sans-serif;
+      padding: 24px 18px;
+      min-height: 100vh;
     }
 
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Header Section */
     .header {
-      padding: 10px 25px 20px 25px;
+      margin-bottom: 28px;
+    }
+
+    .header-title-wrapper {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 12px;
     }
 
-    .back {
+    .back-btn {
+      color: #ffffff;
       text-decoration: none;
-      color: white;
-      font-size: 30px;
+      font-size: 1.5rem;
       line-height: 1;
+      display: flex;
+      align-items: center;
+      transition: opacity 0.2s;
     }
 
-    .title h1 {
-      font-size: 28px;
+    .back-btn:hover {
+      opacity: 0.7;
     }
 
-    .title p {
-      font-family: 'Cairo', sans-serif;
-      color: #999;
-      font-size: 15px;
+    .page-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
 
-    .menu {
-      padding: 10px 20px;
+    .page-subtitle {
+      font-size: 0.95rem;
+      color: #888888;
+      margin-top: 4px;
+      margin-left: 32px;
+    }
+
+    /* Items List */
+    .menu-list {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 16px;
     }
 
     .card {
-      background: #171717;
-      border-radius: 22px;
-      padding: 18px;
+      background-color: #161616;
+      border-radius: 20px;
+      padding: 16px;
       display: flex;
-      align-items: center;
-      gap: 18px;
-      cursor: pointer;
-      transition: transform 0.25s ease;
-      border: 1px solid #222;
+      align-items: flex-start;
+      gap: 16px;
     }
 
-    .card:hover {
-      transform: scale(1.02);
-    }
-
-    .card img {
-      width: 85px;
-      height: 85px;
+    .card-img {
+      width: 75px;
+      height: 75px;
       border-radius: 50%;
       object-fit: cover;
+      flex-shrink: 0;
+      background-color: #222;
     }
 
-    .info {
-      flex: 1;
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
     }
 
-    .info h2 {
-      font-size: 20px;
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
     }
 
-    .info h3 {
-      font-family: 'Cairo', sans-serif;
-      font-weight: 500;
-      color: #cfcfcf;
-      margin-top: 4px;
+    .card-title-ar {
+      font-size: 0.9rem;
+      color: #aaaaaa;
+      margin-top: 2px;
     }
 
-    .price {
+    .card-price {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
       margin-top: 8px;
-      font-size: 18px;
-      font-weight: 600;
     }
 
-    /* Modal Styling */
-    .modal {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      z-index: 1000;
-    }
-
-    .popup {
-      background: #161616;
-      width: 100%;
-      max-width: 360px;
-      border-radius: 25px;
-      padding: 25px;
-      text-align: center;
-      border: 1px solid #2a2a2a;
-    }
-
-    .popup img {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 18px;
-    }
-
-    .popup h2 {
-      font-size: 26px;
-    }
-
-    .popup h3 {
-      font-family: 'Cairo', sans-serif;
-      color: #ccc;
-      margin-top: 6px;
+    .card-details {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid #252525;
+      font-size: 0.8rem;
+      line-height: 1.4;
     }
 
     .desc-en {
-      margin-top: 15px;
-      color: #bdbdbd;
-      font-size: 14px;
-      line-height: 24px;
+      color: #aaaaaa;
+      margin-bottom: 2px;
     }
 
     .desc-ar {
-      margin-top: 8px;
-      font-family: 'Cairo', sans-serif;
-      color: #8d8d8d;
-      font-size: 14px;
-      line-height: 26px;
+      color: #888888;
       direction: rtl;
-    }
-
-    .popup button {
-      margin-top: 22px;
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 15px;
-      background: white;
-      color: black;
-      font-weight: 600;
-      font-size: 16px;
-      cursor: pointer;
+      text-align: left;
     }
   </style>
 </head>
-
 <body>
 
-  <!-- Header Section -->
-  <div class="header">
-    <a href="index.html" class="back">←</a>
-    <div class="title">
-      <h1>Iced Drinks</h1>
-      <p>المشروبات الباردة</p>
-    </div>
+  <div class="container">
+    <header class="header">
+      <div class="header-title-wrapper">
+        <a href="index.html" class="back-btn" aria-label="Back">&larr;</a>
+        <h1 class="page-title">Iced Drinks</h1>
+      </div>
+      <p class="page-subtitle">المشروبات الباردة</p>
+    </header>
+
+    <main class="menu-list">
+
+      <!-- Iced Latte -->
+      <div class="card">
+        <img src="images/iced-latte.jpg" alt="Iced Latte" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=200&auto=format&fit=crop'">
+        <div class="card-content">
+          <h2 class="card-title">Iced Latte</h2>
+          <span class="card-title-ar">آيس لاتيه</span>
+          <div class="card-price">3500 IQD</div>
+          <div class="card-details">
+            <p class="desc-en">Espresso mixed with cold milk over fresh ice.</p>
+            <p class="desc-ar">إسبريسو ممزوج مع الحليب البارد والثلج.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Iced Spanish Latte -->
+      <div class="card">
+        <img src="images/iced-spanish.jpg" alt="Iced Spanish Latte" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1553909489-cd47e0907980?q=80&w=200&auto=format&fit=crop'">
+        <div class="card-content">
+          <h2 class="card-title">Iced Spanish Latte</h2>
+          <span class="card-title-ar">آيس سبانش لاتيه</span>
+          <div class="card-price">4000 IQD</div>
+          <div class="card-details">
+            <p class="desc-en">Sweetened condensed milk, espresso, fresh cold milk & ice.</p>
+            <p class="desc-ar">حليب مكثف محلى، إسبريسو، حليب بارد وثلج.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Iced Mocha -->
+      <div class="card">
+        <img src="images/iced-mocha.jpg" alt="Iced Mocha" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1572442388796-11668a67e53d?q=80&w=200&auto=format&fit=crop'">
+        <div class="card-content">
+          <h2 class="card-title">Iced Mocha</h2>
+          <span class="card-title-ar">آيس موكا</span>
+          <div class="card-price">4000 IQD</div>
+          <div class="card-details">
+            <p class="desc-en">Rich espresso, chocolate sauce, cold milk & ice.</p>
+            <p class="desc-ar">إسبريسو غني، صوص الشوكولاتة، حليب بارد وثلج.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Iced Macha -->
+      <div class="card">
+        <img src="images/iced-mocha.jpg" alt="Iced Mocha" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1572442388796-11668a67e53d?q=80&w=200&auto=format&fit=crop'">
+        <div class="card-content">
+          <h2 class="card-title">Iced Mocha</h2>
+          <span class="card-title-ar">آيس ماتشا</span>
+          <div class="card-price">4500 IQD</div>
+          <div class="card-details">
+            <p class="desc-en">Japanese matcha herbs. With cold milk and ice.</p>
+            <p class="desc-ar">اعشاب الماتشا اليابانية.مع حليب بارد وثلج</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Iced Americano -->
+      <div class="card">
+        <img src="images/iced-americano.jpg" alt="Iced Americano" class="card-img" onerror="this.src='https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=200&auto=format&fit=crop'">
+        <div class="card-content">
+          <h2 class="card-title">Iced Americano</h2>
+          <span class="card-title-ar">آيس أمريكانو</span>
+          <div class="card-price">3000 IQD</div>
+          <div class="card-details">
+            <p class="desc-en">Double shot espresso diluted with chilled water & ice.</p>
+            <p class="desc-ar">دبل إسبريسو مخفف بالماء البارد والثلج.</p>
+          </div>
+        </div>
+      </div>
+
+    </main>
   </div>
-
-  <!-- Menu Cards Section -->
-  <div class="menu">
-
-    <!-- Iced Latte -->
-    <div class="card" onclick="showDrink(
-      'Iced Latte',
-      'أيس لاتيه',
-      'Espresso mixed with cold milk and served over ice.',
-      'إسبريسو غني ممزوج مع حليب بارد ومكعبات الثلج.',
-      '3500 IQD',
-      'https://picsum.photos/300?20'
-    )">
-      <img src="https://picsum.photos/200?20" alt="Iced Latte">
-      <div class="info">
-        <h2>Iced Latte</h2>
-        <h3>أيس لاتيه</h3>
-        <div class="price">3500 IQD</div>
-      </div>
-    </div>
-
-    <!-- Iced Spanish Latte -->
-    <div class="card" onclick="showDrink(
-      'Iced Spanish Latte',
-      'أيس سبانش لاتيه',
-      'Espresso with sweet condensed milk, cold milk, and ice.',
-      'إسبريسو ممزوج مع الحليب المكثف المحلى والحليب البارد فوق الثلج.',
-      '4000 IQD',
-      'https://picsum.photos/300?21'
-    )">
-      <img src="https://picsum.photos/200?21" alt="Iced Spanish Latte">
-      <div class="info">
-        <h2>Iced Spanish Latte</h2>
-        <h3>أيس سبانش لاتيه</h3>
-        <div class="price">4000 IQD</div>
-      </div>
-    </div>
-
-    <!-- Iced Mocha -->
-    <div class="card" onclick="showDrink(
-      'Iced Mocha',
-      'أيس موكا',
-      'Rich espresso combined with dark chocolate, cold milk, and ice.',
-      'إسبريسو غني ممزوج مع الشوكولاتة الداكنة والحليب البارد مع الثلج.',
-      '4000 IQD',
-      'https://picsum.photos/300?22'
-    )">
-      <img src="https://picsum.photos/200?22" alt="Iced Mocha">
-      <div class="info">
-        <h2>Iced Mocha</h2>
-        <h3>أيس موكا</h3>
-        <div class="price">4000 IQD</div>
-      </div>
-    </div>
-
-    <!-- Iced Americano -->
-    <div class="card" onclick="showDrink(
-      'Iced Americano',
-      'أيس أمريكانو',
-      'Bold espresso shots topped with cold water and ice.',
-      'جرعات إسبيريسو مركزة مضافة إلى الماء البارد مع مكعبات الثلج.',
-      '3000 IQD',
-      'https://picsum.photos/300?23'
-    )">
-      <img src="https://picsum.photos/200?23" alt="Iced Americano">
-      <div class="info">
-        <h2>Iced Americano</h2>
-        <h3>أيس أمريكانو</h3>
-        <div class="price">3000 IQD</div>
-      </div>
-    </div>
-
-    <!-- Iced Matcha -->
-<div class="card" onclick="showDrink('Iced Matcha', 'أيس ماتشا', 'Premium Japanese matcha green herps blended with cold milk and ice.', 'اعشاب الماتشا الياباني الفاخر الممزوج مع الحليب البارد والثلج.', '4500 IQD', 'https://picsum.photos/300?24')">
-  <img src="https://picsum.photos/200?24" alt="Iced Matcha">
-  <div class="info">
-    <h2>Iced Matcha</h2>
-    <h3>أيس ماتشا</h3>
-    <div class="price">4500 IQD</div>
-  </div>
-</div>
-
-
-  <!-- Popup / Modal -->
-  <div class="modal" id="drinkModal" onclick="closeModal(event)">
-    <div class="popup" onclick="event.stopPropagation()">
-      <img id="modalImg" src="" alt="Drink Image">
-      <h2 id="modalTitleEn"></h2>
-      <h3 id="modalTitleAr"></h3>
-      <p class="desc-en" id="modalDescEn"></p>
-      <p class="desc-ar" id="modalDescAr"></p>
-      <div class="price" id="modalPrice" style="margin-top: 15px;"></div>
-      <button onclick="hideDrink()">إغلاق / Close</button>
-    </div>
-  </div>
-
-  <!-- JavaScript Code -->
-  <script>
-    function showDrink(titleEn, titleAr, descEn, descAr, price, imgUrl) {
-      document.getElementById('modalTitleEn').innerText = titleEn;
-      document.getElementById('modalTitleAr').innerText = titleAr;
-      document.getElementById('modalDescEn').innerText = descEn;
-      document.getElementById('modalDescAr').innerText = descAr;
-      document.getElementById('modalPrice').innerText = price;
-      document.getElementById('modalImg').src = imgUrl;
-
-      document.getElementById('drinkModal').style.display = 'flex';
-    }
-
-    function hideDrink() {
-      document.getElementById('drinkModal').style.display = 'none';
-    }
-
-    function closeModal(event) {
-      if (event.target.id === 'drinkModal') {
-        hideDrink();
-      }
-    }
-  </script>
 
 </body>
-
 </html>
