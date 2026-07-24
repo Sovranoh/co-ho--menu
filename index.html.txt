@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Coffee House</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="container">
+
+<img src="images/logo.png" class="logo">
+
+<h1>COFFEE HOUSE</h1>
+
+<p class="subtitle">
+Every Cup Has A Story
+</p>
+
+<div class="menu">
+
+<a href="hot.html" class="card">
+
+☕
+
+<h2>Hot Drinks</h2>
+
+<p>المشروبات الحارة</p>
+
+</a>
+
+<a href="iced.html" class="card">
+
+🧊
+
+<h2>Iced Drinks</h2>
+
+<p>المشروبات الباردة</p>
+
+</a>
+
+<a href="brew.html" class="card">
+
+☕
+
+
+<h2>Manual Brew</h2>
+
+<p>القهوة المقطرة V60</p>
+
+</a>
+
+</div>
+
+<div class="qr">
+
+<img src="images/qr.png">
+
+<span>Scan QR</span>
+
+</div>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+
+</html>
