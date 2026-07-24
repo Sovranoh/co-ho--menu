@@ -1,1 +1,318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOIR COFFEE | Hot Drinks</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0b0b0b;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      /* مسافة أمان علوية مضبوطة للآيفون حتى المنيو ينزل جوه الساعة والشريط */
+      padding-top: calc(env(safe-area-inset-top) + 25px);
+      padding-bottom: 40px;
+    }
+
+    .header {
+      padding: 10px 25px 20px 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .back {
+      text-decoration: none;
+      color: white;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .title h1 {
+      font-size: 28px;
+    }
+
+    .title p {
+      font-family: 'Cairo', sans-serif;
+      color: #999;
+      font-size: 15px;
+    }
+
+    .menu {
+      padding: 10px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .card {
+      background: #171717;
+      border-radius: 22px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+      border: 1px solid #222;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+    }
+
+    .card img {
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .info {
+      flex: 1;
+    }
+
+    .info h2 {
+      font-size: 20px;
+    }
+
+    .info h3 {
+      font-family: 'Cairo', sans-serif;
+      font-weight: 500;
+      color: #cfcfcf;
+      margin-top: 4px;
+    }
+
+    .price {
+      margin-top: 8px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    /* Modal Styling */
+    .modal {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .popup {
+      background: #161616;
+      width: 100%;
+      max-width: 360px;
+      border-radius: 25px;
+      padding: 25px;
+      text-align: center;
+      border: 1px solid #2a2a2a;
+    }
+
+    .popup img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 18px;
+    }
+
+    .popup h2 {
+      font-size: 26px;
+    }
+
+    .popup h3 {
+      font-family: 'Cairo', sans-serif;
+      color: #ccc;
+      margin-top: 6px;
+    }
+
+    .desc-en {
+      margin-top: 15px;
+      color: #bdbdbd;
+      font-size: 14px;
+      line-height: 24px;
+    }
+
+    .desc-ar {
+      margin-top: 8px;
+      font-family: 'Cairo', sans-serif;
+      color: #8d8d8d;
+      font-size: 14px;
+      line-height: 26px;
+      direction: rtl;
+    }
+
+    .popup button {
+      margin-top: 22px;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 15px;
+      background: white;
+      color: black;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header Section -->
+  <div class="header">
+    <a href="#" class="back">←</a>
+    <div class="title">
+      <h1>Hot Drinks</h1>
+      <p>المشروبات الحارة</p>
+    </div>
+  </div>
+
+  <!-- Menu Cards Section -->
+  <div class="menu">
+
+    <!-- Espresso Single -->
+    <div class="card" onclick="showDrink(
+      'Espresso Single',
+      'إسبريسو سنكل',
+      'A single shot of rich, concentrated espresso with a smooth golden crema.',
+      'جرعة واحدة من الإسبريسو الغني والمركز مع طبقة كريما ذهبية ناعمة.',
+      '2000 IQD',
+      'https://picsum.photos/300?1'
+    )">
+      <img src="https://picsum.photos/200?1" alt="Espresso Single">
+      <div class="info">
+        <h2>Espresso Single</h2>
+        <h3>إسبريسو سنكل</h3>
+        <div class="price">2000 IQD</div>
+      </div>
+    </div>
+
+    <!-- Espresso Double -->
+    <div class="card" onclick="showDrink(
+      'Espresso Double',
+      'إسبريسو دبل',
+      'Two shots of rich, bold espresso with a smooth golden crema.',
+      'جرعتان من الإسبريسو الغني والمركز بنكهة أقوى مع طبقة كريما ذهبية.',
+      '3000 IQD',
+      'https://picsum.photos/300?5'
+    )">
+      <img src="https://picsum.photos/200?5" alt="Espresso Double">
+      <div class="info">
+        <h2>Espresso Double</h2>
+        <h3>إسبريسو دبل</h3>
+        <div class="price">3000 IQD</div>
+      </div>
+    </div>
+
+    <!-- Caffè Latte -->
+    <div class="card" onclick="showDrink(
+      'Caffè Latte',
+      'لاتيه',
+      'Rich espresso combined with steamed milk and a light layer of foam.',
+      'إسبريسو غني ممزوج مع حليب مبخر وطبقة خفيفة من الرغوة.',
+      '4000 IQD',
+      'https://picsum.photos/300?10'
+    )">
+      <img src="https://picsum.photos/200?10" alt="Caffè Latte">
+      <div class="info">
+        <h2>Caffè Latte</h2>
+        <h3>لاتيه</h3>
+        <div class="price">3000 IQD</div>
+      </div>
+    </div>
+
+    <!-- Spanish Latte -->
+    <div class="card" onclick="showDrink(
+      'Spanish Latte',
+      'سبانش لاتيه',
+      'Espresso mixed with steamed milk and sweetened condensed milk for a rich taste.',
+      'إسبريسو ممزوج مع حليب مبخر وحليب مكثف محلى لطعم غني ومميز.',
+      '4500 IQD',
+      'https://picsum.photos/300?12'
+    )">
+      <img src="https://picsum.photos/200?12" alt="Spanish Latte">
+      <div class="info">
+        <h2>Spanish Latte</h2>
+        <h3>سبانش لاتيه</h3>
+        <div class="price">3500 IQD</div>
+      </div>
+    </div>
+
+    <!-- Cappuccino -->
+    <div class="card" onclick="showDrink(
+      'Cappuccino',
+      'كابتشينو',
+      'Equal parts of bold espresso, steamed milk, and a thick layer of milk foam.',
+      'أجزاء متساوية من الإسبريسو القوي، الحليب المبخر، وطبقة كثيفة من رغوة الحليب.',
+      '4000 IQD',
+      'https://picsum.photos/300?15'
+    )">
+      <img src="https://picsum.photos/200?15" alt="Cappuccino">
+      <div class="info">
+        <h2>Cappuccino</h2>
+        <h3>كابتشينو</h3>
+        <div class="price">3000 IQD</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Popup / Modal -->
+  <div class="modal" id="drinkModal" onclick="closeModal(event)">
+    <div class="popup" onclick="event.stopPropagation()">
+      <img id="modalImg" src="" alt="Drink Image">
+      <h2 id="modalTitleEn"></h2>
+      <h3 id="modalTitleAr"></h3>
+      <p class="desc-en" id="modalDescEn"></p>
+      <p class="desc-ar" id="modalDescAr"></p>
+      <div class="price" id="modalPrice" style="margin-top: 15px;"></div>
+      <button onclick="hideDrink()">إغلاق / Close</button>
+    </div>
+  </div>
+
+  <!-- JavaScript Code -->
+  <script>
+    function showDrink(titleEn, titleAr, descEn, descAr, price, imgUrl) {
+      document.getElementById('modalTitleEn').innerText = titleEn;
+      document.getElementById('modalTitleAr').innerText = titleAr;
+      document.getElementById('modalDescEn').innerText = descEn;
+      document.getElementById('modalDescAr').innerText = descAr;
+      document.getElementById('modalPrice').innerText = price;
+      document.getElementById('modalImg').src = imgUrl;
+
+      document.getElementById('drinkModal').style.display = 'flex';
+    }
+
+    function hideDrink() {
+      document.getElementById('drinkModal').style.display = 'none';
+    }
+
+    function closeModal(event) {
+      if (event.target.id === 'drinkModal') {
+        hideDrink();
+      }
+    }
+  </script>
+
+</body>
+
+</html>
