@@ -4,13 +4,11 @@
   box-sizing: border-box;
 }
 
-body {
-  background: #0d0d0d;
-  font-family: 'Poppins', sans-serif;
-  color: white;
-  /* إضافة مسافة أمان للشاشات الحديثة حتى ما يتداخل المنيو ويا الساعة */
-  padding-top: env(safe-area-inset-top, 20px);
-  padding-bottom: env(safe-area-inset-bottom, 20px);
+body{
+background:#0b0b0b;
+font-family:Poppins,sans-serif;
+color:white;
+padding-top:60px;
 }
 
 .container {
