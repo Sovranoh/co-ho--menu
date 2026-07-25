@@ -6,12 +6,24 @@
 }
 
 body {
-  background: url('../images/bg.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: #ffffff;
-  font-family: 'Poppins', 'Cairo', sans-serif;
+  margin: 0;
   padding: 24px 18px;
   min-height: 100vh;
+
+  background: linear-gradient(
+      rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.35)
+    ),
+    url("../images/background.JPG");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  color: #ffffff;
+  font-family: 'Poppins', 'Cairo', sans-serif;
+  overflow-x: hidden;
 }
 
 .container {
