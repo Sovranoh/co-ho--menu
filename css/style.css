@@ -45,7 +45,7 @@ body::before {
 }
 
 /* ==========================================
-   Animations (تأثيرات الانبثاق والظهور والحرارة المستمرة)
+   Animations (تأثيرات الانبثاق والطفو المستمر)
    ========================================== */
 @keyframes fadeInUp {
   from {
@@ -58,13 +58,13 @@ body::before {
   }
 }
 
-/* أنيميشن الحركة المستمرة للشعار */
+/* أنيميشن الحركة المستمرة (الطفو) */
 @keyframes floatAnimation {
   0% {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
   }
   100% {
     transform: translateY(0px);
@@ -83,7 +83,7 @@ body::before {
   object-fit: contain;
   margin: 0 auto 12px auto;
   display: block;
-  animation: floatAnimation 3s ease-in-out infinite;
+  animation: fadeInUp 1.0s ease forwards, floatAnimation 3s ease-in-out infinite 1.0s;
 }
 
 .header-main h1, .main-header h1 {
@@ -99,7 +99,7 @@ body::before {
   margin-top: 4px;
 }
 
-/* كاردات السكشنات بالصفحة الرئيسية مع تأثيرات الزوم والتفاعل */
+/* كاردات السكشنات بالصفحة الرئيسية مع تأثيرات الطفو المستمر */
 .menu-categories {
   display: flex;
   flex-direction: column;
@@ -121,28 +121,29 @@ body::before {
   color: #ffffff;
   
   opacity: 0;
-  animation: fadeInUp 1.2s ease forwards;
+  /* دمج الانبثاق بالبداية مع الطفو المستمر بعد ما يخلص الانبثاق */
+  animation: fadeInUp 1.2s ease forwards, floatAnimation 3.5s ease-in-out infinite 1.2s;
   
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   will-change: transform, opacity;
   
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+  transition: border-color 0.3s ease, 
               box-shadow 0.3s ease, 
-              background 0.3s ease,
-              border-color 0.3s ease;
+              background 0.3s ease;
 }
 
 /* تأخير ظهور الكاردات بالتسلسل */
-.category-card:nth-child(1) { animation-delay: 0.15s; }
-.category-card:nth-child(2) { animation-delay: 0.3s; }
-.category-card:nth-child(3) { animation-delay: 0.45s; }
+.category-card:nth-child(1) { animation-delay: 0.15s, 1.35s; }
+.category-card:nth-child(2) { animation-delay: 0.3s, 1.5s; }
+.category-card:nth-child(3) { animation-delay: 0.45s, 1.65s; }
 
 /* تأثير الزوم عند تمرير الماوس أو اللمس */
 .category-card:hover {
   transform: scale(1.03);
   border-color: rgba(255, 255, 255, 0.35);
   box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+  animation-play-state: paused; /* يوقف الطفو مؤقتاً من تأشر عليما حتى ما يصير تداخل بالماوس */
 }
 
 .category-card:active {
@@ -235,13 +236,14 @@ body::before {
   overflow: hidden;
   
   opacity: 0;
-  animation: fadeInUp 1.0s ease forwards;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 1.0s ease forwards, floatAnimation 3.2s ease-in-out infinite 1.0s;
+  transition: box-shadow 0.3s ease;
 }
 
 .card:hover {
   transform: scale(1.02);
   box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+  animation-play-state: paused;
 }
 
 .card-img {
@@ -286,7 +288,6 @@ body::before {
 }
 
 .card-details {
-  motion-path
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid #252525;
