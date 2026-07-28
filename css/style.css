@@ -12,9 +12,9 @@ body {
     padding: 24px 18px;
     min-height: 100vh;
     overflow-x: hidden;
-    color: #0d1117;
+    color: #fff;
     font-family: 'Poppins', 'Cairo', sans-serif;
-    background: none;
+    background: #0d1117;
 }
 
 .fixed-bg {
