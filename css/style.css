@@ -45,10 +45,10 @@ body::before {
 }
 
 /* ==========================================
-   Animations (الانبثاق البسيط والطفو متعدد الاتجاهات)
+   Animations (الانبثاق والطفو الموحد والمحترف)
    ========================================== */
 
-/* انبثاق يختص بالشفافية والموقع فقط بدون تغيير بالبلور */
+/* أنيميشن الانبثاق الأولي */
 @keyframes fadeInUpSimple {
   from {
     opacity: 0;
@@ -60,39 +60,13 @@ body::before {
   }
 }
 
-/* أنيميشن طفو متعدد الاتجاهات (أول) */
-@keyframes floatOrganicOne {
+/* أنيميشن طفو موحد وناعم لكل العناصر (نسق التنفس المتزامن) */
+@keyframes floatUniform {
   0%, 100% {
-    transform: translate(0px, 0px);
-  }
-  33% {
-    transform: translate(-4px, -7px);
-  }
-  66% {
-    transform: translate(3px, 4px);
-  }
-}
-
-/* أنيميشن طفو متعدد الاتجاهات (ثاني) */
-@keyframes floatOrganicTwo {
-  0%, 100% {
-    transform: translate(0px, 0px);
-  }
-  33% {
-    transform: translate(5px, -5px);
-  }
-  66% {
-    transform: translate(-3px, 6px);
-  }
-}
-
-/* أنيميشن طفو متعدد الاتجاهات (ثالث) */
-@keyframes floatOrganicThree {
-  0%, 100% {
-    transform: translate(0px, 0px);
+    transform: translateY(0px);
   }
   50% {
-    transform: translate(-4px, 5px);
+    transform: translateY(-6px);
   }
 }
 
@@ -109,7 +83,7 @@ body::before {
   object-fit: contain;
   margin: 0 auto 12px auto;
   display: block;
-  animation: floatOrganicOne 4s ease-in-out infinite;
+  animation: floatUniform 3.5s ease-in-out infinite;
 }
 
 .header-main h1, .main-header h1 {
@@ -132,11 +106,11 @@ body::before {
   gap: 16px;
 }
 
-/* الكاردات الرئيسية بالصفحة الرئيسية - بلور ثابت مع طفو مستقل لكل عنصر */
+/* الكاردات الرئيسية بالصفحة الرئيسية - بلور ثابت وطفو متزامن موحد */
 .category-card {
   background: rgba(18, 18, 18, 0.65);
   -webkit-backdrop-filter: blur(4px) saturate(160%);
-  backdrop-filter: blur(4px) saturate(160%); /* البلور صار ثابتاً هنا */
+  backdrop-filter: blur(4px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
   border-radius: 22px;
@@ -148,6 +122,8 @@ body::before {
   color: #ffffff;
   
   opacity: 0;
+  /* الانبثاق يشتغل بالبداية، وبعده يبدي الطفو الموحد لكل الكاردات نفس اللحظة */
+  animation: fadeInUpSimple 1.0s ease forwards, floatUniform 3.5s ease-in-out infinite 1.0s;
   
   transition: border-color 0.3s ease, 
               box-shadow 0.3s ease, 
@@ -155,18 +131,10 @@ body::before {
               transform 0.3s ease;
 }
 
-/* دمج الانبثاق مع مسارات طفو مختلفة ومستقلة لكل كارد */
-.category-card:nth-child(1) {
-  animation: fadeInUpSimple 1.0s ease forwards, floatOrganicOne 4.2s ease-in-out infinite 1.0s;
-}
-
-.category-card:nth-child(2) {
-  animation: fadeInUpSimple 1.2s ease forwards, floatOrganicTwo 5.0s ease-in-out infinite 1.2s;
-}
-
-.category-card:nth-child(3) {
-  animation: fadeInUpSimple 1.4s ease forwards, floatOrganicThree 4.6s ease-in-out infinite 1.4s;
-}
+/* تأخير بسيط بالانبثاق التسلسلي فقط حتى تطلع مرتبة، بس الطفو يبقى موحد */
+.category-card:nth-child(1) { animation-delay: 0.1s, 1.0s; }
+.category-card:nth-child(2) { animation-delay: 0.2s, 1.0s; }
+.category-card:nth-child(3) { animation-delay: 0.3s, 1.0s; }
 
 /* تأثير التفاعل عند تمرير الماوس */
 .category-card:hover {
@@ -253,7 +221,7 @@ body::before {
 .card {
   background: rgba(18, 18, 18, 0.65);
   -webkit-backdrop-filter: blur(4px) saturate(160%);
-  backdrop-filter: blur(4px) saturate(160%); /* بلور ثابت للكاردات الداخلية أيضاً */
+  backdrop-filter: blur(4px) saturate(160%);
   border: 1px solid rgba(255,255,255,0.10);
   border-radius: 22px;
   box-shadow: 0 10px 35px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
@@ -266,16 +234,9 @@ body::before {
   overflow: hidden;
   
   opacity: 0;
+  /* طفو موحد ومتزامن للكاردات الداخلية أيضاً */
+  animation: fadeInUpSimple 1.0s ease forwards, floatUniform 3.5s ease-in-out infinite 1.0s;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-/* توزيع حركات طفو منفصلة ومنوعة للكاردات الداخلية */
-.card:nth-child(odd) {
-  animation: fadeInUpSimple 1.0s ease forwards, floatOrganicOne 4.5s ease-in-out infinite 1.0s;
-}
-
-.card:nth-child(even) {
-  animation: fadeInUpSimple 1.1s ease forwards, floatOrganicTwo 5.2s ease-in-out infinite 1.1s;
 }
 
 .card:hover {
