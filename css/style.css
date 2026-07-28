@@ -45,9 +45,11 @@ body::before {
 }
 
 /* ==========================================
-   Animations (تأثيرات الانبثاق والطفو المستمر)
+   Animations (الانبثاق البسيط والطفو متعدد الاتجاهات)
    ========================================== */
-@keyframes fadeInUp {
+
+/* انبثاق يختص بالشفافية والموقع فقط بدون تغيير بالبلور */
+@keyframes fadeInUpSimple {
   from {
     opacity: 0;
     transform: translateY(40px);
@@ -58,23 +60,47 @@ body::before {
   }
 }
 
-/* أنيميشن الطفو المستمر والسلس للأبد */
-@keyframes floatAnimation {
-  0% {
-    transform: translateY(0px);
+/* أنيميشن طفو متعدد الاتجاهات (أول) */
+@keyframes floatOrganicOne {
+  0%, 100% {
+    transform: translate(0px, 0px);
+  }
+  33% {
+    transform: translate(-4px, -7px);
+  }
+  66% {
+    transform: translate(3px, 4px);
+  }
+}
+
+/* أنيميشن طفو متعدد الاتجاهات (ثاني) */
+@keyframes floatOrganicTwo {
+  0%, 100% {
+    transform: translate(0px, 0px);
+  }
+  33% {
+    transform: translate(5px, -5px);
+  }
+  66% {
+    transform: translate(-3px, 6px);
+  }
+}
+
+/* أنيميشن طفو متعدد الاتجاهات (ثالث) */
+@keyframes floatOrganicThree {
+  0%, 100% {
+    transform: translate(0px, 0px);
   }
   50% {
-    transform: translateY(-6px);
-  }
-  100% {
-    transform: translateY(0px);
+    transform: translate(-4px, 5px);
   }
 }
 
 .header-main, .main-header {
   text-align: center;
   margin-bottom: 32px;
-  animation: fadeInUp 1.0s ease forwards;
+  opacity: 0;
+  animation: fadeInUpSimple 1.0s ease forwards;
 }
 
 .brand-logo {
@@ -83,7 +109,7 @@ body::before {
   object-fit: contain;
   margin: 0 auto 12px auto;
   display: block;
-  animation: floatAnimation 3s ease-in-out infinite;
+  animation: floatOrganicOne 4s ease-in-out infinite;
 }
 
 .header-main h1, .main-header h1 {
@@ -99,20 +125,18 @@ body::before {
   margin-top: 4px;
 }
 
-/* حاوية السكشنات تسوي انبثاق عام وتضمن ظهورهم بدون تعارض */
+/* حاوية السكشنات */
 .menu-categories {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  opacity: 0;
-  animation: fadeInUp 1.0s ease forwards;
 }
 
-/* الكاردات الرئيسية بالصفحة الرئيسية مع طفو مستمر */
+/* الكاردات الرئيسية بالصفحة الرئيسية - بلور ثابت مع طفو مستقل لكل عنصر */
 .category-card {
   background: rgba(18, 18, 18, 0.65);
   -webkit-backdrop-filter: blur(4px) saturate(160%);
-  backdrop-filter: blur(4px) saturate(160%);
+  backdrop-filter: blur(4px) saturate(160%); /* البلور صار ثابتاً هنا */
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
   border-radius: 22px;
@@ -123,8 +147,7 @@ body::before {
   text-decoration: none;
   color: #ffffff;
   
-  /* أنيميشن الطفو المستمر */
-  animation: floatAnimation 3.5s ease-in-out infinite;
+  opacity: 0;
   
   transition: border-color 0.3s ease, 
               box-shadow 0.3s ease, 
@@ -132,14 +155,22 @@ body::before {
               transform 0.3s ease;
 }
 
-/* تباين بسيط بسرعات الطفو حتى تكون الحركة حية ومو متطابقة تماماً */
-.category-card:nth-child(1) { animation-duration: 3.2s; }
-.category-card:nth-child(2) { animation-duration: 3.8s; animation-delay: 0.2s; }
-.category-card:nth-child(3) { animation-duration: 4.2s; animation-delay: 0.4s; }
+/* دمج الانبثاق مع مسارات طفو مختلفة ومستقلة لكل كارد */
+.category-card:nth-child(1) {
+  animation: fadeInUpSimple 1.0s ease forwards, floatOrganicOne 4.2s ease-in-out infinite 1.0s;
+}
 
-/* تأثير الزوم والتوقف المؤقت للطفو عند تمرير الماوس أو اللمس */
+.category-card:nth-child(2) {
+  animation: fadeInUpSimple 1.2s ease forwards, floatOrganicTwo 5.0s ease-in-out infinite 1.2s;
+}
+
+.category-card:nth-child(3) {
+  animation: fadeInUpSimple 1.4s ease forwards, floatOrganicThree 4.6s ease-in-out infinite 1.4s;
+}
+
+/* تأثير التفاعل عند تمرير الماوس */
 .category-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.02) translateY(-2px);
   border-color: rgba(255, 255, 255, 0.35);
   box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
   animation-play-state: paused;
@@ -217,14 +248,12 @@ body::before {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  opacity: 0;
-  animation: fadeInUp 1.0s ease forwards;
 }
 
 .card {
   background: rgba(18, 18, 18, 0.65);
   -webkit-backdrop-filter: blur(4px) saturate(160%);
-  backdrop-filter: blur(4px) saturate(160%);
+  backdrop-filter: blur(4px) saturate(160%); /* بلور ثابت للكاردات الداخلية أيضاً */
   border: 1px solid rgba(255,255,255,0.10);
   border-radius: 22px;
   box-shadow: 0 10px 35px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05);
@@ -236,9 +265,17 @@ body::before {
   color: inherit;
   overflow: hidden;
   
-  /* أنيميشن الطفو المستمر للكاردات الداخلية */
-  animation: floatAnimation 3.6s ease-in-out infinite;
+  opacity: 0;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* توزيع حركات طفو منفصلة ومنوعة للكاردات الداخلية */
+.card:nth-child(odd) {
+  animation: fadeInUpSimple 1.0s ease forwards, floatOrganicOne 4.5s ease-in-out infinite 1.0s;
+}
+
+.card:nth-child(even) {
+  animation: fadeInUpSimple 1.1s ease forwards, floatOrganicTwo 5.2s ease-in-out infinite 1.1s;
 }
 
 .card:hover {
