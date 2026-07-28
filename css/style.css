@@ -82,7 +82,7 @@ body {
 }
 
 .category-card {
-  background: rgba(255, 255, 255, 0.07); /* هذا السطر هو الحل الجذري لخربطة الخلفية بالآيفون */
+  background: rgba(255, 255, 255, 0.07);
   -webkit-backdrop-filter: blur(3px) saturate(170%);
   backdrop-filter: blur(3px) saturate(170%);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -97,6 +97,12 @@ body {
   
   opacity: 0;
   animation: fadeInUp 1.2s ease forwards;
+  
+  /* أضفني ذني السطرين لمنع خربطة الخلفية بالآيفون */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  
   transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
               box-shadow 0.3s ease, 
               background 0.3s ease,
