@@ -5,8 +5,7 @@
   box-sizing: border-box;
 }
 
-/* ===== Fixed Background ===== */
-
+/* ===== Fixed Background (الحل الهندسي الثابت) ===== */
 body {
     margin: 0;
     padding: 24px 18px;
@@ -14,14 +13,26 @@ body {
     overflow-x: hidden;
     color: #fff;
     font-family: 'Poppins', 'Cairo', sans-serif;
+    position: relative;
+    background-color: #111;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     background: 
         linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
         url("../images/background.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    z-index: -1;
+    pointer-events: none;
 }
-
 
 .content {
     position: relative;
