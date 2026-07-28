@@ -45,7 +45,7 @@ body::before {
 }
 
 /* ==========================================
-   Animations (الانبثاق والطفو الموحد والمحترف)
+   Animations (الانبثاق والطفو الدائري الموحد والمحترف)
    ========================================== */
 
 /* أنيميشن الانبثاق الأولي */
@@ -60,13 +60,22 @@ body::before {
   }
 }
 
-/* أنيميشن طفو موحد وناعم لكل العناصر (نسق التنفس المتزامن) */
-@keyframes floatUniform {
-  0%, 100% {
-    transform: translateY(0px);
+/* أنيميشن طفو دائري سلس ومتزامن لكل العناصر */
+@keyframes floatCircularUniform {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  25% {
+    transform: translate(6px, -4px);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translate(0px, -8px);
+  }
+  75% {
+    transform: translate(-6px, -4px);
+  }
+  100% {
+    transform: translate(0px, 0px);
   }
 }
 
@@ -83,7 +92,7 @@ body::before {
   object-fit: contain;
   margin: 0 auto 12px auto;
   display: block;
-  animation: floatUniform 3.5s ease-in-out infinite;
+  animation: floatCircularUniform 4s ease-in-out infinite;
 }
 
 .header-main h1, .main-header h1 {
@@ -106,7 +115,7 @@ body::before {
   gap: 16px;
 }
 
-/* الكاردات الرئيسية بالصفحة الرئيسية - بلور ثابت وطفو متزامن موحد */
+/* الكاردات الرئيسية بالصفحة الرئيسية - بلور ثابت وطفو دائري متزامن */
 .category-card {
   background: rgba(18, 18, 18, 0.65);
   -webkit-backdrop-filter: blur(4px) saturate(160%);
@@ -122,8 +131,7 @@ body::before {
   color: #ffffff;
   
   opacity: 0;
-  /* الانبثاق يشتغل بالبداية، وبعده يبدي الطفو الموحد لكل الكاردات نفس اللحظة */
-  animation: fadeInUpSimple 1.0s ease forwards, floatUniform 3.5s ease-in-out infinite 1.0s;
+  animation: fadeInUpSimple 1.0s ease forwards, floatCircularUniform 4s ease-in-out infinite 1.0s;
   
   transition: border-color 0.3s ease, 
               box-shadow 0.3s ease, 
@@ -131,7 +139,7 @@ body::before {
               transform 0.3s ease;
 }
 
-/* تأخير بسيط بالانبثاق التسلسلي فقط حتى تطلع مرتبة، بس الطفو يبقى موحد */
+/* تأخير بسيط بالانبثاق التسلسلي فقط */
 .category-card:nth-child(1) { animation-delay: 0.1s, 1.0s; }
 .category-card:nth-child(2) { animation-delay: 0.2s, 1.0s; }
 .category-card:nth-child(3) { animation-delay: 0.3s, 1.0s; }
@@ -234,8 +242,7 @@ body::before {
   overflow: hidden;
   
   opacity: 0;
-  /* طفو موحد ومتزامن للكاردات الداخلية أيضاً */
-  animation: fadeInUpSimple 1.0s ease forwards, floatUniform 3.5s ease-in-out infinite 1.0s;
+  animation: fadeInUpSimple 1.0s ease forwards, floatCircularUniform 4s ease-in-out infinite 1.0s;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
