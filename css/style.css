@@ -45,7 +45,7 @@ body::before {
 }
 
 /* ==========================================
-   Animations (تأثيرات الانبثاق والظهور)
+   Animations (تأثيرات الانبثاق والظهور والحرارة المستمرة)
    ========================================== */
 @keyframes fadeInUp {
   from {
@@ -55,6 +55,19 @@ body::before {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* أنيميشن الحركة المستمرة للشعار */
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }
 
@@ -70,6 +83,7 @@ body::before {
   object-fit: contain;
   margin: 0 auto 12px auto;
   display: block;
+  animation: floatAnimation 3s ease-in-out infinite;
 }
 
 .header-main h1, .main-header h1 {
@@ -272,6 +286,7 @@ body::before {
 }
 
 .card-details {
+  motion-path
   margin-top: 10px;
   padding-top: 10px;
   border-top: 1px solid #252525;
