@@ -50,7 +50,7 @@ body::before {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(60px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -58,7 +58,7 @@ body::before {
   }
 }
 
-/* أنيميشن الحركة المستمرة (الطفو) */
+/* أنيميشن الطفو المستمر والسلس للأبد */
 @keyframes floatAnimation {
   0% {
     transform: translateY(0px);
@@ -83,7 +83,7 @@ body::before {
   object-fit: contain;
   margin: 0 auto 12px auto;
   display: block;
-  animation: fadeInUp 1.0s ease forwards, floatAnimation 3s ease-in-out infinite 1.0s;
+  animation: floatAnimation 3s ease-in-out infinite;
 }
 
 .header-main h1, .main-header h1 {
@@ -99,13 +99,16 @@ body::before {
   margin-top: 4px;
 }
 
-/* كاردات السكشنات بالصفحة الرئيسية مع تأثيرات الطفو المستمر */
+/* حاوية السكشنات تسوي انبثاق عام وتضمن ظهورهم بدون تعارض */
 .menu-categories {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  opacity: 0;
+  animation: fadeInUp 1.0s ease forwards;
 }
 
+/* الكاردات الرئيسية بالصفحة الرئيسية مع طفو مستمر */
 .category-card {
   background: rgba(18, 18, 18, 0.65);
   -webkit-backdrop-filter: blur(4px) saturate(160%);
@@ -120,30 +123,26 @@ body::before {
   text-decoration: none;
   color: #ffffff;
   
-  opacity: 0;
-  /* دمج الانبثاق بالبداية مع الطفو المستمر بعد ما يخلص الانبثاق */
-  animation: fadeInUp 1.2s ease forwards, floatAnimation 3.5s ease-in-out infinite 1.2s;
-  
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  will-change: transform, opacity;
+  /* أنيميشن الطفو المستمر */
+  animation: floatAnimation 3.5s ease-in-out infinite;
   
   transition: border-color 0.3s ease, 
               box-shadow 0.3s ease, 
-              background 0.3s ease;
+              background 0.3s ease,
+              transform 0.3s ease;
 }
 
-/* تأخير ظهور الكاردات بالتسلسل */
-.category-card:nth-child(1) { animation-delay: 0.15s, 1.35s; }
-.category-card:nth-child(2) { animation-delay: 0.3s, 1.5s; }
-.category-card:nth-child(3) { animation-delay: 0.45s, 1.65s; }
+/* تباين بسيط بسرعات الطفو حتى تكون الحركة حية ومو متطابقة تماماً */
+.category-card:nth-child(1) { animation-duration: 3.2s; }
+.category-card:nth-child(2) { animation-duration: 3.8s; animation-delay: 0.2s; }
+.category-card:nth-child(3) { animation-duration: 4.2s; animation-delay: 0.4s; }
 
-/* تأثير الزوم عند تمرير الماوس أو اللمس */
+/* تأثير الزوم والتوقف المؤقت للطفو عند تمرير الماوس أو اللمس */
 .category-card:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
   border-color: rgba(255, 255, 255, 0.35);
   box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
-  animation-play-state: paused; /* يوقف الطفو مؤقتاً من تأشر عليما حتى ما يصير تداخل بالماوس */
+  animation-play-state: paused;
 }
 
 .category-card:active {
@@ -218,6 +217,8 @@ body::before {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  opacity: 0;
+  animation: fadeInUp 1.0s ease forwards;
 }
 
 .card {
@@ -235,9 +236,9 @@ body::before {
   color: inherit;
   overflow: hidden;
   
-  opacity: 0;
-  animation: fadeInUp 1.0s ease forwards, floatAnimation 3.2s ease-in-out infinite 1.0s;
-  transition: box-shadow 0.3s ease;
+  /* أنيميشن الطفو المستمر للكاردات الداخلية */
+  animation: floatAnimation 3.6s ease-in-out infinite;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .card:hover {
