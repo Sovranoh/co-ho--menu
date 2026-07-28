@@ -15,14 +15,13 @@ body {
     color: #fff;
     font-family: 'Poppins', 'Cairo', sans-serif;
     background: 
-    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
-    url("../images/background.jpg");
-
+        linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
+        url("../images/background.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
 }
+
 
 .content {
     position: relative;
