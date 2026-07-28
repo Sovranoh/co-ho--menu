@@ -14,8 +14,15 @@ body {
     overflow-x: hidden;
     color: #fff;
     font-family: 'Poppins', 'Cairo', sans-serif;
-    background: #0d1117;
+    background: 
+        linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
+        url("../images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
+
 
 .fixed-bg {
     position: fixed;
