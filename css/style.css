@@ -48,7 +48,7 @@ body {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(25px);
+    transform: translateY(60px);
   }
   to {
     opacity: 1;
