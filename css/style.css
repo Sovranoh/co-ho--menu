@@ -45,14 +45,13 @@ body::before {
 }
 
 /* ==========================================
-   Animations (الانبثاق والطفو الدائري السلس المستمر)
+   Animations (الظهور من الأسفل للأعلى حصراً بدون طفو)
    ========================================== */
 
-/* أنيميشن الانبثاق الأولي */
-@keyframes fadeInUpSimple {
+@keyframes slideUpEntrance {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(60px);
   }
   to {
     opacity: 1;
@@ -60,30 +59,11 @@ body::before {
   }
 }
 
-/* أنيميشن طفو دائري سلس ومستمر بدون أي توقفات */
-@keyframes floatCircularSmooth {
-  0% {
-    transform: translate(6px, 0px);
-  }
-  25% {
-    transform: translate(0px, -6px);
-  }
-  50% {
-    transform: translate(-6px, 0px);
-  }
-  75% {
-    transform: translate(0px, 6px);
-  }
-  100% {
-    transform: translate(6px, 0px);
-  }
-}
-
-.header-main, .main-header {
+.header-main, .main-header, .header {
   text-align: center;
   margin-bottom: 32px;
   opacity: 0;
-  animation: fadeInUpSimple 1.0s ease forwards;
+  animation: slideUpEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .brand-logo {
@@ -92,7 +72,8 @@ body::before {
   object-fit: contain;
   margin: 0 auto 12px auto;
   display: block;
-  animation: floatCircularSmooth 4.5s ease-in-out infinite;
+  opacity: 0;
+  animation: slideUpEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.1s;
 }
 
 .header-main h1, .main-header h1 {
@@ -109,13 +90,13 @@ body::before {
 }
 
 /* حاوية السكشنات */
-.menu-categories {
+.menu-categories, .menu-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* الكاردات الرئيسية بالصفحة الرئيسية - بلور ثابت وطفو دائري سلس */
+/* الكاردات الرئيسية بالصفحة الرئيسية - ظهور متسلسل من الأسفل للأعلى */
 .category-card {
   background: rgba(18, 18, 18, 0.65);
   -webkit-backdrop-filter: blur(4px) saturate(160%);
@@ -131,7 +112,7 @@ body::before {
   color: #ffffff;
   
   opacity: 0;
-  animation: fadeInUpSimple 1.0s ease forwards, floatCircularSmooth 4.5s ease-in-out infinite 1.0s;
+  animation: slideUpEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   
   transition: border-color 0.3s ease, 
               box-shadow 0.3s ease, 
@@ -139,17 +120,16 @@ body::before {
               transform 0.3s ease;
 }
 
-/* تأخير بسيط بالانبثاق التسلسلي فقط */
-.category-card:nth-child(1) { animation-delay: 0.1s, 1.0s; }
-.category-card:nth-child(2) { animation-delay: 0.2s, 1.0s; }
-.category-card:nth-child(3) { animation-delay: 0.3s, 1.0s; }
+/* تسلسل ظهور الكاردات الرئيسية */
+.category-card:nth-child(1) { animation-delay: 0.15s; }
+.category-card:nth-child(2) { animation-delay: 0.25s; }
+.category-card:nth-child(3) { animation-delay: 0.35s; }
 
 /* تأثير التفاعل عند تمرير الماوس */
 .category-card:hover {
-  transform: scale(1.02) translateY(-2px);
+  transform: translateY(-4px);
   border-color: rgba(255, 255, 255, 0.35);
   box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
-  animation-play-state: paused;
 }
 
 .category-card:active {
@@ -182,10 +162,6 @@ body::before {
 /* ==========================================
    2. الصفحات الداخلية (Hot / Iced / V60)
    ========================================== */
-
-.header {
-  margin-bottom: 28px;
-}
 
 .header-title-wrapper {
   display: flex;
@@ -220,12 +196,7 @@ body::before {
   margin-left: 32px;
 }
 
-.menu-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
+/* كاردات القائمة الداخلية - ظهور متسلسل من الأسفل للأعلى */
 .card {
   background: rgba(18, 18, 18, 0.65);
   -webkit-backdrop-filter: blur(4px) saturate(160%);
@@ -242,14 +213,20 @@ body::before {
   overflow: hidden;
   
   opacity: 0;
-  animation: fadeInUpSimple 1.0s ease forwards, floatCircularSmooth 4.5s ease-in-out infinite 1.0s;
+  animation: slideUpEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
+/* تسلسل ظهور العناصر الداخلية */
+.card:nth-child(1) { animation-delay: 0.15s; }
+.card:nth-child(2) { animation-delay: 0.25s; }
+.card:nth-child(3) { animation-delay: 0.35s; }
+.card:nth-child(4) { animation-delay: 0.45s; }
+.card:nth-child(5) { animation-delay: 0.55s; }
+
 .card:hover {
-  transform: scale(1.02);
+  transform: translateY(-4px);
   box-shadow: 0 14px 40px rgba(0,0,0,0.45);
-  animation-play-state: paused;
 }
 
 .card-img {
