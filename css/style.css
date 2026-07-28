@@ -63,7 +63,7 @@ body::before {
   text-align: center;
   margin-bottom: 32px;
   opacity: 0;
-  animation: slideUpEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideUpEntrance 1.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .brand-logo {
@@ -73,7 +73,7 @@ body::before {
   margin: 0 auto 12px auto;
   display: block;
   opacity: 0;
-  animation: slideUpEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.1s;
+  animation: slideUpEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 1.0s;
 }
 
 .header-main h1, .main-header h1 {
@@ -112,7 +112,7 @@ body::before {
   color: #ffffff;
   
   opacity: 0;
-  animation: slideUpEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideUpEntrance 1.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   
   transition: border-color 0.3s ease, 
               box-shadow 0.3s ease, 
@@ -213,7 +213,7 @@ body::before {
   overflow: hidden;
   
   opacity: 0;
-  animation: slideUpEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideUpEntrance 1.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
