@@ -32,7 +32,6 @@
     </header>
 
     <!-- Menu List -->
-    <!-- Menu List -->
     <main class="menu-list">
 
       <!-- Ethiopian Card -->
@@ -72,6 +71,34 @@
   </div>
 
   </div>
+
+ <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const addButtons = document.querySelectorAll('.add-to-cart-btn');
+
+    addButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            const card = e.target.closest('.card');
+            const name = card.querySelector('.card-title').innerText;
+            const priceText = card.querySelector('.card-price').innerText;
+            const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+
+            let cart = JSON.parse(localStorage.getItem('coffeeCart')) || [];
+
+            let existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+
+            localStorage.setItem('coffeeCart', JSON.stringify(cart));
+            alert(`تمت إضافة ${name} إلى السلة`);
+        });
+    });
+});
+</script>
 
 </body>
 </html>
