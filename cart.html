@@ -2,24 +2,29 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>سلة المشتريات - NOIR CAFFE</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="cart-container" style="padding: 20px;">
-        <h2>سلة المشتريات</h2>
-        
-        <!-- مكان عرض المنتجات المضافة -->
-        <div id="cart-items"></div>
+    <div class="content">
+        <div class="container">
+            <div class="cart-container">
+                <h2>سلة المشتريات</h2>
+                
+                <!-- مكان عرض المنتجات -->
+                <div id="cart-items"></div>
 
-        <!-- المجموع الكلي -->
-        <div class="cart-summary" style="margin-top: 20px;">
-            <h3>المجموع الكلي: <span id="total-price">$0.00</span></h3>
-            <button id="checkout-btn" style="padding: 10px 20px; cursor: pointer;">تأكيد الطلب</button>
+                <!-- المجموع الكلي -->
+                <div class="cart-summary">
+                    <h3>المجموع الكلي: <span id="total-price">$0.00</span></h3>
+                    <button id="checkout-btn">تأكيد الطلب</button>
+                </div>
+
+                <br>
+                <a href="index.html" class="cart-link" style="text-align: center; display: block;">← العودة إلى القائمة</a>
+            </div>
         </div>
-
-        <br>
-        <a href="index.html" style="text-decoration: none; color: #333;">← العودة إلى القائمة</a>
     </div>
 
     <!-- ملف الجافا سكربت الخاص بالسلة -->
