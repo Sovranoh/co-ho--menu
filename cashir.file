@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة طلبات الكاشير - NOIR CAFFE</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="content">
+        <div class="container" style="max-width: 600px;">
+            <div class="cart-container">
+                <h2>لوحة طلبات الكاشير المباشرة</h2>
+                <div id="orders-container" style="margin-top: 20px;">
+                    <p class="empty-cart">جاري تحميل الطلبات...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAtQ2VcIdWzTklDI0tlQbbesnKkwsN6LoI",
+            authDomain: "noir-coffee-d0e66.firebaseapp.com",
+            projectId: "noir-coffee-d0e66",
+            storageBucket: "noir-coffee-d0e66.firebasestorage.app",
+            messagingSenderId: "1032402894592",
+            appId: "1:1032402894592:web:011a2bd5f0059ccf323de5"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        const ordersContainer = document.getElementById('orders-container');
+
+        db.collection("orders").orderBy("timestamp", "desc").onSnapshot((snapshot) => {
+            ordersContainer.innerHTML = '';
+            
+            if (snapshot.empty) {
+                ordersContainer.innerHTML = '<p class="empty-cart">لا توجد طلبات جديدة حالياً.</p>';
+                return;
+            }
+
+            snapshot.forEach((doc) => {
+                let order = doc.data();
+                let orderId = doc.id;
+                
+                let itemsList = '';
+                if (order.items) {
+                    order.items.forEach(i => {
+                        itemsList += `<li style="margin-bottom: 4px;">${i.name} (الكمية: ${i.quantity}) - $${(i.price * i.quantity).toFixed(2)}</li>`;
+                    });
+                }
+
+                let orderDiv = document.createElement('div');
+                orderDiv.style.cssText = "background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); padding: 16px; border-radius: 16px; margin-bottom: 15px;";
+                orderDiv.innerHTML = `
+                    <h3 style="color: #d4a373; font-size: 1.1rem; margin-bottom: 8px;">📍 الطاولة / المكان: ${order.table}</h3>
+                    <ul style="margin-right: 20px; margin-bottom: 12px; color: #ddd; font-size: 0.9rem;">${itemsList}</ul>
+                    <p style="font-weight: bold; margin-bottom: 12px; color: #fff;">المجموع الكلي: $${order.total ? order.total.toFixed(2) : '0.00'}</p>
+                    <button onclick="completeOrder('${orderId}')" style="background: rgba(255, 77, 77, 0.2); border: 1px solid rgba(255, 77, 77, 0.4); color: #ff8080; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.85rem;">إنجاز الطلب وحذفه</button>
+                `;
+                ordersContainer.appendChild(orderDiv);
+            });
+        });
+
+        window.completeOrder = function(id) {
+            db.collection("orders").doc(id).delete().catch((error) => {
+                console.error("خطأ في حذف الطلب: ", error);
+            });
+        }
+    </script>
+</body>
+</html>
