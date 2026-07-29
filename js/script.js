@@ -1,38 +1,27 @@
-// ===============================
-// Noir Coffee - Cart System
-// ===============================
+document.addEventListener('DOMContentLoaded', () => {
+    const addButtons = document.querySelectorAll('.add-to-cart');
 
-// قراءة السلة إذا موجودة
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    addButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const card = e.target.closest('.card');
+            const name = card.querySelector('h3').innerText;
+            const priceText = card.querySelector('.price').innerText;
+            const price = parseFloat(priceText.replace('$', ''));
 
-// حفظ السلة
-function saveCart() {
-    localStorage.setItem("cart", JSON.stringify(cart));
-}
+            // جلب السلة المخزنة مسبقاً أو إنشاء مصفوفة فارغة
+            let cart = JSON.parse(localStorage.getItem('coffeeCart')) || [];
 
-// إضافة منتج
-function addToCart(id, name, price) {
+            // فحص هل المنتج موجود مسبقاً بالسلة
+            let existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
 
-    // هل المنتج موجود؟
-    const existingItem = cart.find(item => item.id === id);
-
-    if (existingItem) {
-        existingItem.quantity++;
-    } else {
-        cart.push({
-            id: id,
-            name: name,
-            price: price,
-            quantity: 1
+            // حفظ التحديثات في الذاكرة المحلية
+            localStorage.setItem('coffeeCart', JSON.stringify(cart));
+            alert(`تمت إضافة ${name} إلى السلة`);
         });
-    }
-
-    saveCart();
-
-    alert(name + " added to cart");
-}
-
-// عرض محتوى السلة (للتجربة)
-function showCart() {
-    console.log(cart);
-}
+    });
+});
