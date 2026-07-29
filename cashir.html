@@ -43,8 +43,17 @@
                 return;
             }
 
+            let activeOrdersCount = 0;
+
             snapshot.forEach((doc) => {
                 let order = doc.data();
+                
+                // تخطي الطلبات التي تم إنجازها مسبقاً
+                if (order.status === "completed") {
+                    return;
+                }
+
+                activeOrdersCount++;
                 let orderId = doc.id;
                 
                 let itemsList = '';
@@ -60,15 +69,26 @@
                     <h3 style="color: #d4a373; font-size: 1.1rem; margin-bottom: 8px;">📍 الطاولة / المكان: ${order.table}</h3>
                     <ul style="margin-right: 20px; margin-bottom: 12px; color: #ddd; font-size: 0.9rem;">${itemsList}</ul>
                     <p style="font-weight: bold; margin-bottom: 12px; color: #fff;">المجموع الكلي: $${order.total ? order.total.toFixed(2) : '0.00'}</p>
-                    <button onclick="completeOrder('${orderId}')" style="background: rgba(255, 77, 77, 0.2); border: 1px solid rgba(255, 77, 77, 0.4); color: #ff8080; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.85rem;">إنجاز الطلب وحذفه</button>
+                    <button onclick="completeOrder('${orderId}')" style="background: rgba(255, 77, 77, 0.2); border: 1px solid rgba(255, 77, 77, 0.4); color: #ff8080; padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 0.85rem;">إنجاز الطلب</button>
                 `;
                 ordersContainer.appendChild(orderDiv);
             });
+
+            if (activeOrdersCount === 0) {
+                ordersContainer.innerHTML = '<p class="empty-cart">لا توجد طلبات جديدة حالياً.</p>';
+            }
+
+        }, (error) => {
+            console.error("خطأ في جلب الطلبات: ", error);
+            ordersContainer.innerHTML = '<p class="empty-cart" style="color: #ff8080;">خطأ في الاتصال بقاعدة البيانات. تحقق من الإنترنت.</p>';
         });
 
         window.completeOrder = function(id) {
-            db.collection("orders").doc(id).delete().catch((error) => {
-                console.error("خطأ في حذف الطلب: ", error);
+            db.collection("orders").doc(id).update({
+                status: "completed"
+            }).catch((error) => {
+                console.error("خطأ في تحديث حالة الطلب: ", error);
+                alert("حدث خطأ أثناء تحديث الطلب، حاول مرة أخرى.");
             });
         }
     </script>
